@@ -40,7 +40,46 @@ async function createUser(req, res) {
     }
 }
 
+async function profileUpdate(req, res){
+    try{
+        const body = req.body;
+        const user  = User.findOneAndUpdate({ userID: req.body.userID }, { bio: req.body.bio, media : req.body.image, gender: req.body.gender }, { new: true });
+        if (user){
+            res.status(200).json({
+                status: false,
+                statusCode: 200,
+                message: "Profile Updated"
+            });
+        }
+
+    }catch (err){
+        res.status(500).json(err.message);
+    }
+}
+
+async function login(req, res){
+    const body = req.body;
+    const user = await User.findOne({$and : [ {$or :[{userID: body.userID}, {email: body.userID} ]},{password : body.password}]})
+    console.log(user);
+    if(user){
+        res.status(200).json({
+            status: false,
+            statusCode: 200,
+            message: user
+        });
+        return 0;
+    }
+    res.status(404).json({
+        status: false,
+        statusCode: 404,
+        error: "User Not Found"
+    });
+}
+
+
 module.exports = {
     getAllUsers,
-    createUser
+    createUser,
+    profileUpdate,
+    login
 }
