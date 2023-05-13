@@ -8,6 +8,4 @@ router
     .post("/create", createUser)
 
 
-;
-
 module.exports = router;

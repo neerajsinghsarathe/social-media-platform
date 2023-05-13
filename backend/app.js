@@ -4,9 +4,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const uploadRouter = require('./routes/upload');
 const {connectDB} = require("./bin/db");
-const multer  =   require('multer');
-
 const app = express();
 
 app.use(logger('dev'));
@@ -29,5 +28,6 @@ connectDB("mongodb://127.0.0.1:27017/social-media-platform")
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/upload', uploadRouter)
 
 module.exports = app;

@@ -33,7 +33,7 @@ async function createUser(req, res) {
         return res.status(201).json({
             status: true,
             statusCode: 201,
-            error: "User Created"
+            message: "User Created"
         });
     } catch (err) {
         res.status(500).json(err.message);
