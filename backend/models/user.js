@@ -8,32 +8,32 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    userName : {
+    userName: {
         type: String,
         required: true,
     },
-    email : {
-      type : String,
-      required : true,
-      unique: true
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
-    password : {
-      type : String,
-      required : true
+    password: {
+        type: String,
+        required: true
     },
     gender: {
-      type : String,
+        type: String,
         enum: genderChoices
     },
-    image :{
-      type : String,
+    image: {
+        type: String,
     },
     bio: {
         type: String,
     },
-    friendsList : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'user'
+    friendsList: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     }
 }, {timestamps: true});
 
