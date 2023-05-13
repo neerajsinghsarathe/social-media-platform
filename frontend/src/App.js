@@ -1,24 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import Login from './Components/Login';
+import Register from './Components/Register';
+import Profile from "./Components/Profile"
+import Home from './Components/Home';
+import Messaging from './Components/Messaging';
 import 'bootstrap/dist/css/bootstrap.min.css';
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App=()=> {
+  return(
+  
+<BrowserRouter>
+<Routes>
+  <Route path="/" element={<Login/>}/>
+  <Route path="/register" element={<Register/>}/>
+  <Route path="/profile/:id" element={<Profile/>}/>
+  <Route path="/default/:id" element={<Home/>}/>
+  <Route path="/messaging" element={<Messaging/>}/>
+</Routes>
+</BrowserRouter>
   );
 }
 

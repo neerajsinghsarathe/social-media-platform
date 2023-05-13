@@ -40,11 +40,15 @@ async function createUser(req, res) {
     }
 }
 
-async function profileUpdate(req, res){
-    try{
+async function profileUpdate(req, res) {
+    try {
         const body = req.body;
-        const user  = User.findOneAndUpdate({ userID: req.body.userID }, { bio: req.body.bio, media : req.body.image, gender: req.body.gender }, { new: true });
-        if (user){
+        const user = User.findOneAndUpdate({userID: req.body.userID}, {
+            bio: req.body.bio,
+            media: req.body.image,
+            gender: req.body.gender
+        }, {new: true});
+        if (user) {
             res.status(200).json({
                 status: false,
                 statusCode: 200,
@@ -52,16 +56,16 @@ async function profileUpdate(req, res){
             });
         }
 
-    }catch (err){
+    } catch (err) {
         res.status(500).json(err.message);
     }
 }
 
-async function login(req, res){
+async function login(req, res) {
     const body = req.body;
-    const user = await User.findOne({$and : [ {$or :[{userID: body.userID}, {email: body.userID} ]},{password : body.password}]})
+    const user = await User.findOne({$and: [{$or: [{userID: body.userID}, {email: body.userID}]}, {password: body.password}]})
     console.log(user);
-    if(user){
+    if (user) {
         res.status(200).json({
             status: false,
             statusCode: 200,
@@ -76,10 +80,25 @@ async function login(req, res){
     });
 }
 
+async function findByUser(req, res) {
+    const body = req.body;
+    const users = await User.find({userName: {$regex: req.body.name, $options: 'i'}});
+    if (users) {
+        res.status(200).json({
+            status: false,
+            statusCode: 200,
+            message: users
+        });
+        return 0;
+    }
+    res.status(404).json("User Not Found");
+}
+
 
 module.exports = {
     getAllUsers,
     createUser,
+    findByUser,
     profileUpdate,
     login
 }
