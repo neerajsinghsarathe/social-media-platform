@@ -5,10 +5,10 @@ const {getAllUsers, createUser, profileUpdate, login, findByUser} = require("../
 /* GET users listing. */
 router
     .get('/', getAllUsers)
+    .get('/findByUser',findByUser)
     .post("/create", createUser)
     .post("profileUpdate", profileUpdate)
     .post("/login", login)
-    .post('/findByUser',findByUser)
 
 
 module.exports = router;

@@ -63,7 +63,7 @@ async function profileUpdate(req, res) {
 
 async function login(req, res) {
     const body = req.body;
-    const user = await User.findOne({$and: [{$or: [{userID: body.userID}, {email: body.userID}]}, {password: body.password}]})
+    const user = await User.findOne({$and: [{$or: [{userID: body.userID}, {email: body.userID}]}, {password: body.password}]},{password: 0, __v : 0, _id : 0})
     console.log(user);
     if (user) {
         res.status(200).json({
@@ -81,15 +81,20 @@ async function login(req, res) {
 }
 
 async function findByUser(req, res) {
-    const body = req.body;
-    const users = await User.find({userName: {$regex: req.body.name, $options: 'i'}});
-    if (users) {
-        res.status(200).json({
+    if (req.query.name === ""){
+        return res.status(400).json({
             status: false,
+            statusCode: 400,
+            error: "Please Enter User Name"
+        });
+    }
+    const users = await User.find({userName: {$regex: req.query.name, $options: 'i'}},{password: 0, __v : 0, _id : 0});
+    if (users) {
+        return res.status(200).json({
+            status: true,
             statusCode: 200,
             message: users
         });
-        return 0;
     }
     res.status(404).json("User Not Found");
 }

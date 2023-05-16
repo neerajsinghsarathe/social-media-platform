@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Login from './Components/Login';
-import Register from './Components/Register';
-import Profile from "./Components/Profile"
-import Home from './Components/Home';
-import Messaging from './Components/Messaging';
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from "./pages/Profile"
+import Home from './pages/Home';
+import Messaging from './pages/Messaging';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     return (
@@ -16,7 +17,7 @@ const App = () => {
                 <Route path="/" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/profile/:id" element={<Profile/>}/>
-                <Route path="/default/:id" element={<Home/>}/>
+                <Route path="/feed" element={<Home/>}/>
                 <Route path="/messaging" element={<Messaging/>}/>
             </Routes>
         </BrowserRouter>

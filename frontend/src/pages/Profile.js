@@ -1,9 +1,10 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import {CloseButton, FormGroup, Modal} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import {Header} from "../Components/Header";
 
 const Profile = () => {
     const id = useParams();
@@ -42,6 +43,7 @@ const Profile = () => {
     }
     return (
         <>
+            <Header id={id} />
             <Button variant="primary" onClick={handleShow}>
                 Update Profile
             </Button>
