@@ -99,11 +99,31 @@ async function findByUser(req, res) {
     res.status(404).json("User Not Found");
 }
 
+async function findByUserID(req, res) {
+    if (req.query.name === ""){
+        return res.status(400).json({
+            status: false,
+            statusCode: 400,
+            error: "Please Enter User Name"
+        });
+    }
+    const users = await User.findOne({userName: req.query.name},{password: 0, __v : 0, _id : 0});
+    if (users) {
+        return res.status(200).json({
+            status: true,
+            statusCode: 200,
+            message: users
+        });
+    }
+    res.status(404).json("User Not Found");
+}
+
 
 module.exports = {
     getAllUsers,
     createUser,
     findByUser,
+    findByUserID,
     profileUpdate,
     login
 }

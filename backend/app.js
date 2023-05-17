@@ -5,6 +5,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const uploadRouter = require('./routes/upload');
+const requestRouter = require('./routes/friend-request');
 const {connectDB} = require("./bin/db");
 const app = express();
 
@@ -31,6 +32,7 @@ connectDB("mongodb+srv://saipreethiasuri8:preethi8@cluster0.kwcegjd.mongodb.net/
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/upload', uploadRouter)
+app.use('/upload', uploadRouter);
+app.use('/request', requestRouter);
 
 module.exports = app;

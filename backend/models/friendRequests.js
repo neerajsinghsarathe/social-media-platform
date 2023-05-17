@@ -1,20 +1,22 @@
 const mongoose = require('mongoose').default;
 
-const statusChoices = [true, false];
+const statusChoices = ['requested', 'accepted','declined'];
 const requestsSchema = new mongoose.Schema({
     senderID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        type: mongoose.Schema.Types.userName,
+        ref: 'user',
+        required : true
     },
     receiverID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        type: mongoose.Schema.Types.userName,
+        ref: 'user',
+        required : true
     },
-    accepted: {
+    status: {
         type: String,
         enum: statusChoices,
+        required: true,
         default: false
 
     }
-
 }, {timestamps: true});
