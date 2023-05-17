@@ -5,7 +5,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const uploadRouter = require('./routes/upload');
-const requestRouter = require('./routes/friend-request');
+const requestRouter = require('./routes/friendRequest');
 const {connectDB} = require("./bin/db");
 const app = express();
 

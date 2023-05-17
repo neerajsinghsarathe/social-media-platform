@@ -31,10 +31,16 @@ const userSchema = new mongoose.Schema({
     bio: {
         type: String,
     },
-    friendsList: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
-    }
+    friendRequests: [{
+        type: mongoose.Schema.Types.String,
+        ref: 'user',
+        unique : true
+    }],
+    friendsList: [{
+        type: mongoose.Schema.Types.String,
+        ref: 'user',
+        unique : true
+    }]
 }, {timestamps: true});
 
 const User = mongoose.model("user", userSchema);

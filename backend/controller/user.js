@@ -100,14 +100,15 @@ async function findByUser(req, res) {
 }
 
 async function findByUserID(req, res) {
-    if (req.query.name === ""){
+    console.log(req.query.id)
+    if (req.query.id === "" || req.query.id == null){
         return res.status(400).json({
             status: false,
             statusCode: 400,
             error: "Please Enter User Name"
         });
     }
-    const users = await User.findOne({userName: req.query.name},{password: 0, __v : 0, _id : 0});
+    const users = await User.findOne({userID: req.query.id},{password: 0, __v : 0, _id : 0});
     if (users) {
         return res.status(200).json({
             status: true,
@@ -115,7 +116,11 @@ async function findByUserID(req, res) {
             message: users
         });
     }
-    res.status(404).json("User Not Found");
+    res.status(404).json({
+        status: false,
+        statusCode: 404,
+        error: "User Not Found"
+    });
 }
 
 
